@@ -75,15 +75,15 @@ function Feature({
   kind,
   title,
   value,
-  className = '',
+  wide = false,
 }: {
   kind: string
   title: string
   value: string
-  className?: string
+  wide?: boolean
 }) {
   return (
-    <div className={`card p-4${className}`}>
+    <div className={wide ? 'card p-4 sm:col-span-2' : 'card p-4'}>
       <span className="eyebrow">{kind}</span>
       <h3 className="font-title text-title">{title}</h3>
       <p className={codeBox}>{value}</p>
@@ -218,10 +218,10 @@ export default function Home() {
             kind="Categorical"
             title="Fuel type"
             value="X regular · Z premium · E ethanol E85 · D diesel · N natural gas"
-            className=" sm:col-span-2"
+            wide
           />
         </div>
-        <div className="bg-amber-50/80 border border-amber-200/80 rounded-xl p-5 grid grid-cols-1 md:grid-cols-2 gap-4"></div>
+        <div className="border rounded-xl grid grid-cols-1 md:grid-cols-2 gap-4"></div>
       </section>
 
       {/* [About the model] */}
@@ -234,13 +234,13 @@ export default function Home() {
             </h2>
           </div>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2">
           {modelCards.map((c) => (
-            <div key={c.title} className="card p-6 flex flex-col gap-3">
+            <div key={c.title} className="card flex flex-col gap-3">
               <h3 className="flex items-center gap-2 font-title text-title">
                 <Icon name={c.icon} className="text-primary" /> {c.title}
               </h3>
-              <p className="font-body-sm text-body-sm text-on-surface-variant leading-relaxed">{c.text}</p>
+              <p className="font-body-sm text-body-sm text-on-surface-variant">{c.text}</p>
             </div>
           ))}
         </div>
