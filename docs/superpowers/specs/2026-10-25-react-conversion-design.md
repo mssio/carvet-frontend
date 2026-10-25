@@ -75,7 +75,9 @@ CarVet is a public website by Team Moneyball for estimating vehicle CO₂ emissi
 - **Picking a preset button:** same as the mockup (fill the form, show that preset's results).
 - **Editing fields and pressing Predict:** call `predict(formValues)` with the current form values (controlled inputs). While pending, show a loading state on the button/results. On a result, show it and update the running cost. On `null`, show a clear "No estimate available yet for this vehicle" empty state in the results panel (running-cost outputs show "—"). On error, show an error message. Then scroll to results as the mockup does.
 - This is the one intentional behaviour change from the mockup.
-- Keep the existing **React Compiler** (babel preset) and **oxlint** setup if they work with the React Router Vite plugin. If the compiler conflicts, drop it and note why.
+- **React Compiler is required** (owner's decision, 2026-10-25), not optional. Keep `babel-plugin-react-compiler` ^1.0.0 running through `@rolldown/plugin-babel` alongside the React Router Vite plugin. Today `vite.config.ts` imports `reactCompilerPreset` from `@vitejs/plugin-react`, which this project removes. Configure the compiler directly instead (e.g. `babel({ plugins: [['babel-plugin-react-compiler', {}]] })`, limited to app source files) rather than keeping `@vitejs/plugin-react` just for that import. Verify it is active: the production build's route chunks must contain the compiler runtime (`react/compiler-runtime` / `_c(` memo cache calls). If React Router's plugin and the Babel plugin conflict, stop and report rather than dropping the compiler.
+- **Stay on Babel 7** (`@babel/core` ^7.29.7, owner's decision 2026-10-25). Don't upgrade to Babel 8 (8.0.9 is out): `@react-router/dev` 8.5.0 depends on `@babel/core` ^7.29.7 and `babel-plugin-react-compiler` 1.0.0 is built on Babel 7's `@babel/types`. Revisit when both support Babel 8.
+- Keep the existing **oxlint** setup.
 
 ### Packages
 
