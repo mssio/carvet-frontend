@@ -29,6 +29,43 @@ describe('SiteHeader', () => {
   })
 })
 
+describe('SiteHeader variants', () => {
+  const at = (path: string) =>
+    html(
+      <MemoryRouter initialEntries={[path]}>
+        <SiteHeader />
+      </MemoryRouter>,
+    )
+  const DATA = 'Data source: Natural Resources Canada Fuel Consumption Ratings — Open Government Licence – Canada'
+
+  it('centres the nav only on /, with no data source strip', () => {
+    const out = at('/')
+    expect(out).toContain('translateX(-50%)')
+    expect(out).toContain('position:relative')
+    expect(out).toContain('hidden md:block w-28')
+    expect(out).not.toContain(DATA)
+  })
+
+  it.each(['/predict', '/explore'])('uses the right-aligned header on %s', (path) => {
+    const out = at(path)
+    expect(out).not.toContain('translateX')
+    expect(out).not.toContain('position:relative')
+    expect(out).not.toContain('w-28')
+    expect(out).not.toContain(DATA)
+  })
+
+  it('treats /compare/ like /compare', () => {
+    expect(at('/compare/')).toContain(DATA)
+    expect(at('/predict/')).not.toContain('translateX')
+  })
+
+  it('adds the data source strip only on /compare', () => {
+    const out = at('/compare')
+    expect(out).toContain(DATA)
+    expect(out).not.toContain('translateX')
+  })
+})
+
 describe('SiteFooter', () => {
   it('renders the credits', () => {
     expect(html(<SiteFooter />)).toContain('CarVet by Team Moneyball · Data: NRCan, OGL-Canada')

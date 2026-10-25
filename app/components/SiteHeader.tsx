@@ -19,7 +19,10 @@ function NavLinks({ onNavigate }: { onNavigate: () => void }) {
 }
 
 export function SiteHeader() {
-  const { key } = useLocation()
+  const { key, pathname } = useLocation()
+  // Static hosts may serve prerendered pages with a trailing slash.
+  const path = pathname.length > 1 ? pathname.replace(/\/+$/, '') : pathname
+  const centred = path === '/'
   const [menu, dispatch] = useReducer(menuReducer, key, closedMenu)
   // Any navigation (including Back to the page it was opened on) closes the menu.
   if (menu.locationKey !== key) dispatch({ type: 'location', key })
@@ -29,7 +32,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-40 bg-white/90 backdrop-blur border-b border-slate-200">
       <div
-        style={{ position: 'relative' }}
+        style={centred ? { position: 'relative' } : undefined}
         className="max-w-7xl mx-auto px-margin-mobile md:px-margin h-16 flex items-center justify-between gap-4"
       >
         <Link to="/" className="flex items-center gap-2" onClick={close}>
@@ -40,7 +43,7 @@ export function SiteHeader() {
         <nav
           aria-label="Main"
           className="hidden md:flex items-center gap-1 p-1 rounded-xl bg-surface-container-low"
-          style={{ position: 'absolute', left: '50%', transform: 'translateX(-50%)' }}
+          style={centred ? { position: 'absolute', left: '50%', transform: 'translateX(-50%)' } : undefined}
         >
           <NavLinks onNavigate={close} />
         </nav>
@@ -58,7 +61,7 @@ export function SiteHeader() {
         </button>
 
         {/* Spacer to balance the desktop flex layout */}
-        <div className="hidden md:block w-28"></div>
+        {centred && <div className="hidden md:block w-28"></div>}
       </div>
 
       <nav
@@ -68,6 +71,13 @@ export function SiteHeader() {
       >
         <NavLinks onNavigate={close} />
       </nav>
+      {path === '/compare' && (
+        <div className="bg-surface-container-low border-t border-slate-200">
+          <p className="max-w-7xl mx-auto px-margin-mobile md:px-margin py-1.5 font-label-sm text-label-sm text-tertiary flex items-center gap-1.5">
+            <Icon name="database" /> Data source: Natural Resources Canada Fuel Consumption Ratings — Open Government Licence – Canada
+          </p>
+        </div>
+      )}
     </header>
   )
 }
