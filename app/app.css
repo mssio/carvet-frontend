@@ -314,3 +314,44 @@
     border: 1px solid #ffe3b3;
   }
 }
+
+@layer components {
+  /* Explore page: ported verbatim from explore.html's page-level <style>. #resetFilters is
+     the .reset-filters class here. Kept in the components layer, after .field, so
+     .field:focus still outranks select:focus-visible as it did in the mockup. */
+  .chart-wrap {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    min-width: 0;
+  }
+  .chart-wrap-wide {
+    height: 340px;
+  }
+  .chart-wrap-tall {
+    height: 390px;
+  }
+  .chart-wrap canvas {
+    max-width: 100%;
+  }
+  .reset-filters {
+    white-space: nowrap;
+    cursor: pointer;
+  }
+  .reset-filters:focus-visible,
+  select:focus-visible {
+    outline: 3px solid #64748b;
+    outline-offset: 2px;
+  }
+  @media (max-width: 640px) {
+    .chart-wrap {
+      height: 260px;
+    }
+    .chart-wrap-wide {
+      height: 300px;
+    }
+    .chart-wrap-tall {
+      height: 330px;
+    }
+  }
+}
