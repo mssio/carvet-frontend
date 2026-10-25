@@ -79,15 +79,25 @@ CarVet is a public website by Team Moneyball for estimating vehicle CO₂ emissi
 
 ### Packages
 
-| Package | Purpose |
-|---|---|
-| `react-router`, `@react-router/dev` (dev) | Routing, framework-mode build and prerendering. Replaces `@vitejs/plugin-react` (remove it and whatever only it needed). |
-| `tailwindcss`, `@tailwindcss/vite` | Styling. |
-| `chart.js`, `react-chartjs-2` | Explore's charts. |
-| `papaparse`, `@types/papaparse` | Explore's CSV loading. |
-| `@fontsource/inter`, `@fontsource/jetbrains-mono`, `@fontsource/plus-jakarta-sans` | Self-hosted fonts, same weights as the mockup. |
-| `wrangler` (dev) | Cloudflare deploy/preview. |
-| `vitest` (dev) | Unit tests for the pure helpers. |
+Versions decided with the owner on 2026-10-25 (latest on npm that day; save as `^` ranges, lockfile pins exact). React Router stays on **v7 (7.18.4, latest 7.x)**, not 8.x (8.5.0 is out but the owner asked for v7) and not 7.1.x (only supports Vite ≤6 / TS 5, incompatible with this repo's Vite 8 / TS 6).
+
+| Package | Version | Kind | Purpose |
+|---|---|---|---|
+| `react-router` | ^7.18.4 | dep | Routing. |
+| `@react-router/dev` | ^7.18.4 | dev | Framework-mode build and prerendering. Replaces `@vitejs/plugin-react` (remove it and whatever only it needed). |
+| `tailwindcss` | ^4.3.3 | dep | Styling. |
+| `@tailwindcss/vite` | ^4.3.3 | dep | Tailwind Vite plugin. |
+| `chart.js` | ^4.6.1 | dep | Explore's charts (mockup used 4.4.7, a minor bump). |
+| `react-chartjs-2` | ^5.3.1 | dep | React wrapper for Chart.js. |
+| `papaparse` | ^5.7.0 | dep | Explore's CSV loading (mockup used 5.4.1, a minor bump). |
+| `@types/papaparse` | ^5.5.2 | dev | Types. |
+| `@fontsource/inter` | ^5.3.0 | dep | Self-hosted font (400/500/600/700). |
+| `@fontsource/jetbrains-mono` | ^5.3.0 | dep | Self-hosted font (400/600). |
+| `@fontsource/plus-jakarta-sans` | ^5.3.0 | dep | Self-hosted font (600/700/800). |
+| `wrangler` | ^4.152.0 | dev | Cloudflare deploy/preview. |
+| `vitest` | ^5.0.5 | dev | Unit tests for the pure helpers. |
+
+Unchanged: `react`/`react-dom` ^19.3.1, `vite` ^8.3.4, `typescript` ~6.0.3, `oxlint`, React Compiler packages.
 
 Not packages: the SVG chart helper (`charts.js`) becomes small React SVG components. `icons.js` becomes an `<Icon name="…" />` component. Also install whatever extra packages the official React Router framework template requires for `ssr: false` (check against current docs; don't add server runtime packages that aren't needed).
 
