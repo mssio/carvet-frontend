@@ -1,11 +1,10 @@
 /* oxlint-disable typescript/no-explicit-any */
-import Papa from "papaparse";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { loadCars, loadCsv, matchesSpec, predict, stats } from "./data";
 
 vi.mock("papaparse", () => ({ default: { parse: vi.fn() } }));
 
-const parse = vi.mocked(Papa.parse) as unknown as ReturnType<typeof vi.fn>;
+const parse = vi.mocked((await import("papaparse")).default.parse) as unknown as ReturnType<typeof vi.fn>;
 const rav4 = stats.presets.predict.find((p) => p.id === "rav4")!.record;
 const spec = { year: rav4.year, make: rav4.make, cls: rav4.cls, engine: rav4.engine, cyl: rav4.cyl, trans: rav4.trans, fuel: rav4.fuel };
 
@@ -31,6 +30,10 @@ describe("loadCsv", () => {
   it("rejects when the download fails", async () => {
     parse.mockImplementation((_url: string, cfg: any) => cfg.error(new Error("Failed to fetch")));
     await expect(loadCsv()).rejects.toThrow(/Failed to fetch/);
+  });
+  it("maps non-Error failures to a readable message", async () => {
+    parse.mockImplementation((_url: string, cfg: any) => cfg.error({ type: "error" }));
+    await expect(loadCsv()).rejects.toThrow(/Network error loading/);
   });
   it("coerces and trims rows", async () => {
     parse.mockImplementation((_url: string, cfg: any) =>

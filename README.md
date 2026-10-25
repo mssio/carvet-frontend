@@ -72,7 +72,7 @@ All data access goes through `app/lib/data.ts`. `predict(spec)` is the single pl
 
 ## Deployment
 
-See [docs/cloudflare-deploy.md](docs/cloudflare-deploy.md). Note that `/explore` redirects (307) to `/explore/` on Cloudflare; client navigation is unaffected.
+See [docs/cloudflare-deploy.md](docs/cloudflare-deploy.md). Assets use `html_handling: drop-trailing-slash`, so `/explore` is served directly and `/explore/` redirects to `/explore`; client navigation is unaffected.
 
 ## Roadmap
 

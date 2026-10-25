@@ -41,6 +41,8 @@ describe("carvet helpers", () => {
     expect(fmtSigned(0)).toBe("0");
     expect(formatMoney(2805)).toBe("$2,805");
     expect(formatMoney(null)).toBe("—");
+    expect(formatMoney(Infinity)).toBe("—");
+    expect(formatMoney(annualCost(8.5, 1e308, 1.65))).toBe("—");
     expect(formatMoney(annualCost(8.5, toNumber(""), 1.65))).toBe("—");
   });
   it("reads hash params", () => {

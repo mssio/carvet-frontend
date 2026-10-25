@@ -43,7 +43,7 @@ Note: the Worker is assets-only; there is nothing to configure beyond `wrangler.
 
 ## Things you may notice
 
-- `/explore` answers `307` to `/explore/` on Cloudflare (default trailing-slash handling for prerendered `folder/index.html` files). Client-side navigation is unaffected.
+- `wrangler.jsonc` sets `html_handling: "drop-trailing-slash"`: `/explore` is served directly from the prerendered `explore/index.html`, and `/explore/` redirects to `/explore`. Client-side navigation is unaffected.
 - Unknown URLs get the `404.html` shell with status 404; the client router renders the not-found page.
 - `npm install` on npm 11 prints "install scripts" warnings for esbuild, fsevents and workerd. Harmless.
 - `npm run build` prints a Vite chunk-size warning for the lazily loaded `cars.json` chunk used by `/compare`. Expected.

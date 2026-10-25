@@ -1,4 +1,3 @@
-import Papa from "papaparse";
 import statsJson from "../data/stats.json";
 import type { CsvRow, Prediction, Stats, VehicleRecord, VehicleSpec } from "./types";
 import { vehicleName } from "./carvet";
@@ -39,7 +38,9 @@ function coerceRow(raw: Record<string, unknown>): CsvRow {
   return out as unknown as CsvRow;
 }
 
-export function loadCsv(url: string = CSV_URL): Promise<CsvRow[]> {
+export async function loadCsv(url: string = CSV_URL): Promise<CsvRow[]> {
+  // Loaded on demand so PapaParse stays out of the shared chunk every page preloads.
+  const { default: Papa } = await import("papaparse");
   return new Promise((resolve, reject) => {
     Papa.parse<Record<string, unknown>>(url, {
       download: true,
@@ -53,7 +54,8 @@ export function loadCsv(url: string = CSV_URL): Promise<CsvRow[]> {
         }
         resolve(results.data.map(coerceRow));
       },
-      error: (err) => reject(err instanceof Error ? err : new Error(String(err))),
+      // Network/CORS failures arrive as a ProgressEvent, not an Error.
+      error: (err) => reject(err instanceof Error ? err : new Error(`Network error loading ${url}`)),
     });
   });
 }

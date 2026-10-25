@@ -39,7 +39,7 @@ export function fmtSigned(n: number | null | undefined, digits = 0): string {
 }
 
 export function formatMoney(n: number | null): string {
-  return n === null ? "—" : "$" + fmt(n);
+  return n === null || !Number.isFinite(n) ? "—" : "$" + fmt(n);
 }
 
 export function hashParam(hash: string, key: string): string | null {
