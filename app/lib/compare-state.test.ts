@@ -24,4 +24,11 @@ describe("compareAddState", () => {
     expect(compareAddState(sel, mk("e"))).toEqual(full);
     expect(compareAddState(sel, sel[0])).toEqual(full);
   });
+  it("shows the full-list note even with an incomplete selection (mockup parity)", () => {
+    const sel = [mk("a"), mk("b"), mk("c"), mk("d")];
+    expect(compareAddState(sel, null)).toEqual({
+      disabled: true,
+      note: "You can compare up to 4 cars. Remove one to add another.",
+    });
+  });
 });
