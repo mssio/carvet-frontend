@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 96" width="240" height="96" role="img" aria-label="Van">
+  <ellipse cx="120" cy="88" rx="104" ry="5" fill="#0b1c30" fill-opacity=".08"/>
+  <path d="M14 72V26q0-10 10-10h136q10 0 16 6l24 22 14 3q12 3 12 13v12q0 4-4 4h-24a15 15 0 0 0-30 0H74a15 15 0 0 0-30 0H18q-4 0-4-4z" fill="#2e7d32"/>
+  <g fill="#e5eeff"><rect x="24" y="24" width="44" height="18" rx="3"/><rect x="76" y="24" width="44" height="18" rx="3"/><rect x="128" y="24" width="30" height="18" rx="3"/><path d="M166 24q5 0 8 3l17 17h-25z"/></g>
+  <rect x="216" y="56" width="10" height="5" rx="2" fill="#68fadd"/>
+  <g fill="#0b1c30"><circle cx="59" cy="76" r="12"/><circle cx="183" cy="76" r="12"/></g>
+  <g fill="#cbd5e1"><circle cx="59" cy="76" r="5"/><circle cx="183" cy="76" r="5"/></g>
+</svg>

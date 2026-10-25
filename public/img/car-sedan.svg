@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 96" width="240" height="96" role="img" aria-label="Sedan">
+  <ellipse cx="120" cy="88" rx="104" ry="5" fill="#0b1c30" fill-opacity=".08"/>
+  <path d="M18 70V60q0-8 12-10l40-4 25-16q5-3 13-3h42q8 0 14 5l18 14 30 4q10 2 10 10v10q0 4-4 4h-24a14 14 0 0 0-28 0H76a14 14 0 0 0-28 0H22q-4 0-4-4z" fill="#2e7d32"/>
+  <g fill="#e5eeff"><path d="M102 33h28v13H84z"/><path d="M136 33h14q6 0 10 3l12 10h-36z"/></g>
+  <rect x="212" y="54" width="10" height="4" rx="2" fill="#68fadd"/>
+  <g fill="#0b1c30"><circle cx="62" cy="74" r="11"/><circle cx="180" cy="74" r="11"/></g>
+  <g fill="#cbd5e1"><circle cx="62" cy="74" r="5"/><circle cx="180" cy="74" r="5"/></g>
+</svg>
