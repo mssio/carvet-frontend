@@ -1,6 +1,17 @@
 import { Links, Meta, Outlet, Scripts, ScrollRestoration, isRouteErrorResponse } from 'react-router'
 import type { Route } from './+types/root'
+import '@fontsource/inter/400.css'
+import '@fontsource/inter/500.css'
+import '@fontsource/inter/600.css'
+import '@fontsource/inter/700.css'
+import '@fontsource/jetbrains-mono/400.css'
+import '@fontsource/jetbrains-mono/600.css'
+import '@fontsource/plus-jakarta-sans/600.css'
+import '@fontsource/plus-jakarta-sans/700.css'
+import '@fontsource/plus-jakarta-sans/800.css'
 import './app.css'
+import { SiteFooter } from './components/SiteFooter'
+import { SiteHeader } from './components/SiteHeader'
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -12,7 +23,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
         <Meta />
         <Links />
       </head>
-      <body>
+      <body className="min-h-screen flex flex-col">
         {children}
         <ScrollRestoration />
         <Scripts />
@@ -22,7 +33,24 @@ export function Layout({ children }: { children: React.ReactNode }) {
 }
 
 export default function App() {
-  return <Outlet />
+  return (
+    <>
+      <a
+        href="#main"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 bg-white px-3 py-2 rounded-lg z-50"
+      >
+        Skip to content
+      </a>
+      <SiteHeader />
+      <main
+        id="main"
+        className="flex-1 w-full max-w-7xl mx-auto px-margin-mobile md:px-margin py-space-xl flex flex-col gap-space-xl"
+      >
+        <Outlet />
+      </main>
+      <SiteFooter />
+    </>
+  )
 }
 
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {

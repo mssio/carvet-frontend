@@ -1,1 +1,296 @@
 @import "tailwindcss";
+
+/* Theme ported from the mockup's Tailwind v3 config (.mockup/assets/carvet.css). */
+@theme {
+  --color-primary: rgb(13 99 27);
+  --color-primary-container: rgb(46 125 50);
+  --color-on-primary: rgb(255 255 255);
+  --color-on-primary-container: rgb(203 255 194);
+  --color-secondary: rgb(0 107 92);
+  --color-secondary-container: rgb(104 250 221);
+  --color-on-secondary-container: rgb(0 114 97);
+  --color-error: rgb(186 26 26);
+  --color-surface: rgb(248 249 255);
+  --color-surface-container: rgb(229 238 255);
+  --color-surface-container-low: rgb(239 244 255);
+  --color-inverse-surface: rgb(33 49 69);
+  --color-on-surface: rgb(11 28 48);
+  --color-on-surface-variant: rgb(64 73 61);
+  --color-tertiary: rgb(75 86 106);
+  --color-band-low: rgb(22 163 74);
+  --color-band-moderate: rgb(234 179 8);
+  --color-band-elevated: rgb(249 115 22);
+  --color-band-severe: rgb(220 38 38);
+
+  /* Tailwind v3 slate palette and shadow-sm (v4 changed both slightly). */
+  --color-slate-50: rgb(248 250 252);
+  --color-slate-100: rgb(241 245 249);
+  --color-slate-200: rgb(226 232 240);
+  --color-slate-300: rgb(203 213 225);
+  --color-slate-500: rgb(100 116 139);
+  --color-slate-600: rgb(71 85 105);
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+
+  --font-headline: "Plus Jakarta Sans", system-ui, sans-serif;
+  --font-body: Inter, system-ui, sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, monospace;
+  --font-headline-xl: var(--font-headline);
+  --font-headline-lg: var(--font-headline);
+  --font-headline-md: var(--font-headline);
+  --font-headline-sm: var(--font-headline);
+  --font-display: var(--font-headline);
+  --font-display-mobile: var(--font-headline);
+  --font-headline-xl-mobile: var(--font-headline);
+  --font-metric-stat: var(--font-headline);
+  --font-title: var(--font-body);
+  --font-body-lg: var(--font-body);
+  --font-body-md: var(--font-body);
+  --font-body-sm: var(--font-body);
+  --font-label-md: var(--font-body);
+  --font-label-sm: var(--font-body);
+
+  --text-display: 48px;
+  --text-display--line-height: 56px;
+  --text-display--letter-spacing: -0.03em;
+  --text-display--font-weight: 800;
+  --text-display-mobile: 32px;
+  --text-display-mobile--line-height: 40px;
+  --text-display-mobile--letter-spacing: -0.025em;
+  --text-display-mobile--font-weight: 800;
+  --text-headline-xl: 36px;
+  --text-headline-xl--line-height: 44px;
+  --text-headline-xl--letter-spacing: -0.025em;
+  --text-headline-xl--font-weight: 700;
+  --text-headline-xl-mobile: 26px;
+  --text-headline-xl-mobile--line-height: 34px;
+  --text-headline-xl-mobile--letter-spacing: -0.02em;
+  --text-headline-xl-mobile--font-weight: 700;
+  --text-headline-lg: 28px;
+  --text-headline-lg--line-height: 36px;
+  --text-headline-lg--letter-spacing: -0.02em;
+  --text-headline-lg--font-weight: 700;
+  --text-headline-md: 22px;
+  --text-headline-md--line-height: 28px;
+  --text-headline-md--letter-spacing: -0.015em;
+  --text-headline-md--font-weight: 600;
+  --text-headline-sm: 18px;
+  --text-headline-sm--line-height: 24px;
+  --text-headline-sm--letter-spacing: -0.01em;
+  --text-headline-sm--font-weight: 600;
+  --text-metric-stat: 32px;
+  --text-metric-stat--line-height: 36px;
+  --text-metric-stat--letter-spacing: -0.02em;
+  --text-metric-stat--font-weight: 700;
+  --text-title: 16px;
+  --text-title--line-height: 24px;
+  --text-title--letter-spacing: -0.005em;
+  --text-title--font-weight: 600;
+  --text-body-lg: 16px;
+  --text-body-lg--line-height: 26px;
+  --text-body-lg--font-weight: 400;
+  --text-body-md: 14px;
+  --text-body-md--line-height: 22px;
+  --text-body-md--font-weight: 400;
+  --text-body-sm: 13px;
+  --text-body-sm--line-height: 18px;
+  --text-body-sm--font-weight: 400;
+  --text-label-md: 12px;
+  --text-label-md--line-height: 16px;
+  --text-label-md--letter-spacing: 0.02em;
+  --text-label-md--font-weight: 600;
+  --text-label-sm: 11px;
+  --text-label-sm--line-height: 14px;
+  --text-label-sm--letter-spacing: 0.03em;
+  --text-label-sm--font-weight: 500;
+  --text-code: 12px;
+  --text-code--line-height: 18px;
+  --text-code--font-weight: 400;
+
+  --spacing-space-sm: 0.5rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-lg: 1.5rem;
+  --spacing-space-xl: 2.5rem;
+  --spacing-margin-mobile: 1rem;
+  --spacing-margin: 2rem;
+}
+
+@layer base {
+  /* Tailwind v3 preflight defaults that v4 changed. */
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: #e5e7eb;
+  }
+  button,
+  [role="button"] {
+    cursor: pointer;
+  }
+  :disabled {
+    cursor: default;
+  }
+  input::placeholder,
+  textarea::placeholder {
+    opacity: 1;
+    color: #9ca3af;
+  }
+  input:where(:not([type="button"], [type="reset"], [type="submit"])),
+  select,
+  textarea {
+    background-color: revert;
+    border-radius: revert;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    background-color: var(--color-surface);
+    font-family: var(--font-body);
+    color: var(--color-on-surface);
+    overscroll-behavior: none;
+  }
+  :focus-visible {
+    outline: 2px solid #00bfa5;
+    outline-offset: 2px;
+  }
+  svg.icon {
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+  }
+}
+
+@layer components {
+  .card {
+    border-radius: 0.75rem;
+    border-width: 1px;
+    border-color: rgb(226 232 240);
+    background-color: rgb(255 255 255);
+    padding: 1.5rem;
+    box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  }
+  .eyebrow {
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-tertiary);
+  }
+  .chip,
+  .eyebrow {
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 11px;
+    line-height: 14px;
+    font-weight: 500;
+  }
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-radius: 9999px;
+    padding: 0.125rem 0.625rem;
+    letter-spacing: 0.03em;
+  }
+  .chip-low {
+    background-color: rgb(220 252 231);
+    color: rgb(21 128 61);
+  }
+  .chip-moderate {
+    background-color: rgb(254 249 195);
+    color: rgb(161 98 7);
+  }
+  .chip-elevated {
+    background-color: rgb(255 237 213);
+    color: rgb(194 65 12);
+  }
+  .chip-severe {
+    background-color: rgb(254 226 226);
+    color: rgb(185 28 28);
+  }
+  .btn-primary,
+  .btn-secondary {
+    display: inline-flex;
+    height: 2.75rem;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.5rem;
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 24px;
+    letter-spacing: -0.005em;
+    font-weight: 600;
+  }
+  .btn-primary {
+    background-color: rgb(46 125 50);
+    color: rgb(255 255 255);
+    transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 0.15s;
+  }
+  .btn-primary:hover {
+    background-color: rgb(13 99 27);
+  }
+  .btn-secondary {
+    border-width: 1px;
+    border-color: rgb(226 232 240);
+    background-color: rgb(255 255 255);
+    color: rgb(30 41 59);
+  }
+  .btn-secondary:hover {
+    background-color: rgb(248 250 252);
+  }
+  .nav-link {
+    border-radius: 0.5rem;
+    padding: 0.375rem 1rem;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 12px;
+    line-height: 16px;
+    letter-spacing: 0.02em;
+    font-weight: 600;
+    color: var(--color-on-surface-variant);
+  }
+  .nav-link:hover {
+    background-color: var(--color-surface-container);
+  }
+  .nav-link[aria-current="page"] {
+    background-color: var(--color-primary-container);
+    color: rgb(255 255 255);
+  }
+  .estimate-note {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    border-radius: 9999px;
+    background-color: rgb(255 251 235);
+    padding: 0.25rem 0.75rem;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 11px;
+    line-height: 14px;
+    letter-spacing: 0.03em;
+    font-weight: 500;
+    color: rgb(146 64 14);
+  }
+  .field {
+    height: 2.75rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    border-width: 1px;
+    border-color: rgb(226 232 240);
+    background-color: rgb(255 255 255);
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    font-family: Inter, system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 22px;
+    font-weight: 400;
+  }
+  .field:focus {
+    border-color: rgb(46 125 50);
+    outline: 2px solid transparent;
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgb(46 125 50 / 0.15);
+  }
+}
