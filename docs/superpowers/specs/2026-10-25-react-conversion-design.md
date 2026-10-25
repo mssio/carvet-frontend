@@ -99,6 +99,17 @@ Versions decided with the owner on 2026-10-25 (latest on npm that day; save as `
 | `wrangler` | ^4.152.0 | dev | Cloudflare deploy/preview. |
 | `vitest` | ^5.0.5 | dev | Unit tests for the pure helpers. |
 
+**Compatibility verified 2026-10-25** (throwaway smoke app in a scratch dir, Node 24.21, npm 11.19). The exact package set above, minus `@vitejs/plugin-react`, installs with no peer conflicts. The only unmet entries are optional peers (`@react-router/serve`, `@vitejs/plugin-rsc`, `react-server-dom-webpack`, `@babel/runtime`) not needed under `ssr: false`. There is a single copy each of react 19.3.1, vite 8.3.5 and @babel/core 7.29.7. Confirmed working together:
+- `react-router build` with `ssr: false` + `prerender` writes `build/client/index.html`, `build/client/<route>/index.html` and `build/client/__spa-fallback.html`.
+- The React Compiler is active with this config, placed after `reactRouter()` in `plugins` (route chunks contain `react.memo_cache_sentinel`):
+  ```ts
+  plugins: [tailwindcss(), reactRouter(), babel({ include: /\/app\/.*\.[jt]sx?$/, plugins: [["babel-plugin-react-compiler", {}]] })]
+  ```
+- Tailwind 4 `@theme` tokens compile (`--color-primary` → `.bg-primary`). `@fontsource` CSS imports emit woff/woff2 into the build. `react-chartjs-2` + `chart.js` and `papaparse` bundle.
+- `wrangler deploy --dry-run` reads `build/client` as an assets-only Worker. `wrangler dev` serves `/about/` → 200 and unknown paths → 404 with `not_found_handling: "404-page"`. `wrangler preview` exists (marked open beta in 4.152.0).
+- `vitest run` works alongside the React Router Vite plugin.
+- npm 11 blocks install scripts by default and warns about `esbuild`, `fsevents` and `workerd`. Everything above worked with them unapproved. Builder's call whether to add them to `allowScripts` (`npm install-scripts approve …`). Mention the warning in README so teammates aren't alarmed.
+
 Unchanged: `react`/`react-dom` ^19.3.1, `vite` ^8.3.4, `typescript` ~6.0.3, `oxlint`, React Compiler packages.
 
 Not packages: the SVG chart helper (`charts.js`) becomes small React SVG components. `icons.js` becomes an `<Icon name="…" />` component. Also install whatever extra packages the official React Router framework template requires for `ssr: false` (check against current docs; don't add server runtime packages that aren't needed).
