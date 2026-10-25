@@ -27,7 +27,7 @@ export function CarCards({
     const win = selected.length >= 2 && r.co2 === minCo2
     const cost = annualCost(r.comb, km, price)
     return (
-      <div key={i} className={"card flex flex-col gap-2 relative"}>
+      <div key={i} className="card flex flex-col gap-2 relative">
         {win && <span className="chip chip-low absolute">Greenest ✓</span>}
         <img src={carImage(r.cls)} alt={r.cls} className="w-full" />
         <h3 className="font-title text-title">{`${r.year} ${r.make}`}</h3>
