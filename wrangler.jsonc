@@ -1,0 +1,9 @@
+// See docs/cloudflare-deploy.md for how this Worker is built and deployed.
+{
+  "name": "carvet",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./build/client",
+    "not_found_handling": "404-page"
+  }
+}
