@@ -10,7 +10,7 @@ CarVet is a public website by Team Moneyball for estimating vehicle CO₂ emissi
 
 ## Goals
 
-1. Convert the four mockup pages to React with **React Router v7**, matching the mockup's look and behaviour:
+1. Convert the four mockup pages to React with **React Router v8**, matching the mockup's look and behaviour:
    - `/` Home (`index.html`)
    - `/explore` Explore (`explore.html`)
    - `/predict` Predict (`predict.html`)
@@ -55,7 +55,7 @@ CarVet is a public website by Team Moneyball for estimating vehicle CO₂ emissi
 ## Decisions
 
 ### Decided with the owner
-- React Router **v7**.
+- React Router **v8** (the owner first asked for v7, then switched to v8 on 2026-10-25 after learning 8.x is the current major).
 - No authentication.
 - The backend (later) only runs the prediction model. The CSV is the only raw data source.
 - Library list (below) approved.
@@ -79,12 +79,12 @@ CarVet is a public website by Team Moneyball for estimating vehicle CO₂ emissi
 
 ### Packages
 
-Versions decided with the owner on 2026-10-25 (latest on npm that day; save as `^` ranges, lockfile pins exact). React Router stays on **v7 (7.18.4, latest 7.x)**, not 8.x (8.5.0 is out but the owner asked for v7) and not 7.1.x (only supports Vite ≤6 / TS 5, incompatible with this repo's Vite 8 / TS 6).
+Versions decided with the owner on 2026-10-25 (latest on npm that day; save as `^` ranges, lockfile pins exact). React Router uses **v8 (8.5.0, latest)**. v8 requires Node >=22.22.0 and React >=19.2.7 (this repo has React ^19.3.1; local Node is 24). Its peers accept Vite ^7||^8, TypeScript ^5.1–^7 and Wrangler ^4. v8 removed all `future.v8_*` flags (their behaviour is now default; `splitRouteModules` is a top-level config option, on by default). Follow v8 docs, not v7 examples. Pin the Node version for Cloudflare Workers Builds (e.g. `.node-version` with `22` or `24` plus `"engines": { "node": ">=22.22.0" }` in package.json), and mention it in the Cloudflare docs note.
 
 | Package | Version | Kind | Purpose |
 |---|---|---|---|
-| `react-router` | ^7.18.4 | dep | Routing. |
-| `@react-router/dev` | ^7.18.4 | dev | Framework-mode build and prerendering. Replaces `@vitejs/plugin-react` (remove it and whatever only it needed). |
+| `react-router` | ^8.5.0 | dep | Routing. |
+| `@react-router/dev` | ^8.5.0 | dev | Framework-mode build and prerendering. Replaces `@vitejs/plugin-react` (remove it and whatever only it needed). |
 | `tailwindcss` | ^4.3.3 | dep | Styling. |
 | `@tailwindcss/vite` | ^4.3.3 | dep | Tailwind Vite plugin. |
 | `chart.js` | ^4.6.1 | dep | Explore's charts (mockup used 4.4.7, a minor bump). |
