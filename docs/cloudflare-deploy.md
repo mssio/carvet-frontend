@@ -6,7 +6,7 @@ CarVet is a static site served by a Cloudflare Worker that only serves static as
 
 Confirmed today: the R2 bucket behind `https://sait-r2.mss.io` sends **no CORS headers** for any origin, including localhost. Until the bucket owner adds a CORS rule, the Explore page cannot load its CSV and shows an error message in the status line (the static KPI cards still render). Home, Predict and Compare are unaffected.
 
-Where: Cloudflare dashboard -> R2 -> the `sait-r2.mss.io` bucket -> Settings -> CORS policy -> add rule. Example policy (replace the placeholders; add each preview URL pattern or custom domain you use):
+Where: Cloudflare dashboard -> R2, then find the bucket whose Settings -> Custom Domains lists `sait-r2.mss.io` (`sait-r2.mss.io` is a custom-domain hostname, not necessarily the bucket name; the CSV lives at `carvet/mockup/combined-output.csv` in that bucket). In that bucket: Settings -> CORS policy -> add rule. Example policy (replace the placeholders; add each preview URL pattern or custom domain you use):
 
 ```json
 [
@@ -38,7 +38,8 @@ Use your real production URL (the `workers.dev` URL or your custom domain). Prev
 6. Optional: add a custom domain (Settings -> Domains & Routes).
 7. **R2 CORS**: see the section above. Do it before judging the deployment.
 8. Manual deploy from a laptop: `npx wrangler login`, then `npm run build && npm run deploy`.
-9. The Worker is assets-only; there is nothing to configure beyond `wrangler.jsonc`.
+
+Note: the Worker is assets-only; there is nothing to configure beyond `wrangler.jsonc`.
 
 ## Things you may notice
 
